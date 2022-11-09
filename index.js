@@ -13,16 +13,16 @@ import usersRoute from "../api/routes/users.js";
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_DBS);
+    await mongoose.connect(process.env.MONGO);
     console.log("db connected");
   } catch (error) {
     throw error;
   }
 };
 
-// mongoose.connect("disconnect", () => {
-//   console.log("db disconnected");
-// });
+mongoose.connection.on("disconnect", () => {
+  console.log("db disconnected");
+});
 
 app.use(cors());
 app.use(express.json());
@@ -33,8 +33,8 @@ app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelRoute);
 app.use("/api/rooms", roomsRoute);
 
-//server
-const port = process.env.PORT || 8800;
+// server;
+const port = process.env.PORT || 5000;
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

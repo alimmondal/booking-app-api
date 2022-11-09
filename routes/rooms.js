@@ -4,7 +4,8 @@ import {
   deleteRoomById,
   getAllRooms,
   getRoomById,
-  updateRoomById,
+  updateRoom,
+  updateRoomAvailability,
 } from "../controllers/room.controller.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 const app = express();
@@ -16,14 +17,15 @@ router.post("/:hotelId", verifyAdmin, createRoom);
 
 // GET ONE BY ID
 router.get("/:id", getRoomById);
+router.put("/availability/:id", updateRoomAvailability);
+
+// DELETE
+router.delete("/:id/:hotelId", verifyAdmin, deleteRoomById);
 
 // GET ALL HOTEL
 router.get("/", getAllRooms);
 
 // update
-router.patch("/:id", verifyAdmin, updateRoomById);
-
-// DELETE
-router.delete("/:id/:hotelId", verifyAdmin, deleteRoomById);
+router.patch("/:id", verifyAdmin, updateRoom);
 
 export default router;

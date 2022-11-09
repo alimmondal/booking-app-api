@@ -1,9 +1,9 @@
 import express from "express";
 import {
-  deleteUserById,
-  getAllUser,
-  getUserUsersById,
-  updateUserById,
+  deleteUser,
+  getUser,
+  getUsers,
+  updateUser,
 } from "../controllers/user.controller.js";
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js";
 
@@ -19,15 +19,16 @@ const router = express.Router();
 //   res.send("hello admin, you are logged in and you can delete all account");
 // });
 
-// GET ONE BY ID
-router.get("/:id", verifyUser, getUserUsersById);
-
-// GET ALL HOTEL
-router.get("/", verifyAdmin, getAllUser);
-
 // update
-router.patch("/:id", verifyUser, updateUserById);
+router.patch("/:id", verifyUser, updateUser);
 
 // DELETE
-router.delete("/:id", verifyUser, deleteUserById);
+router.delete("/:id", deleteUser);
+
+// GET ONE BY ID
+router.get("/:id", verifyUser, getUser);
+
+// GET ALL users
+router.get("/", getUsers);
+
 export default router;
