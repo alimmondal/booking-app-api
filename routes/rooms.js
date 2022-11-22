@@ -13,7 +13,7 @@ const app = express();
 const router = express.Router();
 
 // create
-router.post("/:hotelId", verifyAdmin, createRoom);
+router.post("/:hotelId", createRoom);
 
 // GET ONE BY ID
 router.get("/:id", getRoomById);

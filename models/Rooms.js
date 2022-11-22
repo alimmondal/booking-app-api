@@ -24,7 +24,6 @@ const RoomSchema = new mongoose.Schema(
         unavailableDates: { type: [Date] },
       },
     ],
-    photo: [String],
   },
   {
     timestamps: true,
