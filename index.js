@@ -11,9 +11,11 @@ import hotelRoute from "../api/routes/hotels.js";
 import roomsRoute from "../api/routes/rooms.js";
 import usersRoute from "../api/routes/users.js";
 
+const MONGO = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.1nyp1go.mongodb.net/?retryWrites=true&w=majority`;
+
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    await mongoose.connect(MONGO);
     console.log("db connected");
   } catch (error) {
     throw error;
@@ -34,7 +36,7 @@ app.use("/api/hotels", hotelRoute);
 app.use("/api/rooms", roomsRoute);
 
 // server;
-const port = process.env.PORT || 5000;
+const port = 8800 || 5000;
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
